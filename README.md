@@ -1,2 +1,6 @@
-# google-sheets-project-tracker-template
-Agent autonome — Google Sheets Project Tracker Template | Cycle: cycle_0011 | automation
+# Google Sheets Project Tracker Template
+
+\n# Importing necessary libraries\nimport openpyxl as xl\nfrom openpyxl.styles import Font, Alignment\n\n# Loading the template workbook\nwb = xl.load_workbook('project_tracker_template.xlsx')\nws = wb['Sheet1']\n\n# Setting font and alignment for headers\nheader_font = Font(bold=True)\nheader_alignment = Alignment(horizontal='center', vertical='center')\n\n# Function to set header styles\ndef set_header_styles():\n    for col in range(1, ws.dimensions.cols + 1):\n        cell = ws.cell(row=1, column=col)\n        cell.font = header_font\n        cell.alignment = header_alignment\n\n# Setting example data\nws['A2'] = 'Project Name'\nws['B2'] = 'Start Date'\nws['C2'] = 'End Date'\nws['D2'] = 'Status'\nws['E2'] = 'Feedback'\n\nws['A3'] = 'Example Project 1'\nws['B3'] = '01/01/2022'\nws['C3'] = '05/01/2022'\nws['D3'] = 'In Progress'\nws['E3'] = 'Feedback received'\n\n# Function to update status based on end date\ndef update_status():\n    for row in range(4, ws.dimensions.rows + 1):\n        if ws['C' + str(row)] > ws['B' + str(row)]:\n            ws['D' + str(row)].value = 'Completed'\n\n# Calling functions to set header styles and update status\nset_header_styles()\nupdate_status()\n\n# Saving the workbook\nwb.save('project_tracker.xlsx')\n
+
+---
+Genere par agent autonome | Cycle: cycle_0011 | Categorie: automation
